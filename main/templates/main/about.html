@@ -1,10 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block css_for_footer %}
-    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
-{% endblock %}
-
 {% block content %}
     <!-- Контент -->
     <div class="container">
@@ -18,12 +14,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block footer %}
-<footer class="py-4 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
-    </div>
-</footer>
-{% endblock %}
+{% endblock  %}
