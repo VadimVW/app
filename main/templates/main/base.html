@@ -49,20 +49,19 @@
                         <li class="nav-item">
                             <a class="nav-link  text-white" href="users/login.html">Войти</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link  text-white" href="{% url "menu:index" %}">Меню</a>
+                        </li>
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Мой профиль
                             </a>
-                        <li class="nav-item">
-                            <a class="nav-link  text-white" href="{% url "menu:index" %}">
-                                Меню
-                            </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>
                                 <li><a class="dropdown-item  text-white" href="users/profile.html">Личный кабинет</a>
                                 </li>
-                                <li><a class="dropdown-item  text-white" href="#">Админ панель</a></li>
+                                <li><a class="dropdown-item  text-white" href="{% url "admin:index" %}">Админ панель</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -78,13 +77,12 @@
             </div>
             <div class="menu">
                 <ul class="category-menu">
-                    <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/sushi.png" %} "class="m-2" alt="Суші" title="Суші" width="60" height="60"><p>Суші</p></a></li>
-                    <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/pizza.png" %} "class="m-2" alt="Піца" title="Піца" width="60" height="60"><p>Піца</p></a></li>
-                    <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/salad.png" %} "class="m-2" alt="Салати" title="Салати" width="60" height="60"><p>Салати</p></a></li>
-                    <!-- <li><img src="" alt=""><a class="text-black" href="goods/catalog.html">Гостинная</a></li>
-                    <li><img src="" alt=""><a class="text-black" href="goods/catalog.html">Офис</a></li>
-                    <li><img src="" alt=""><a class="text-black" href="goods/catalog.html">Фурнитура</a></li>
-                    <li><img src="" alt=""><a class="text-black" href="goods/catalog.html">Декор</a></li> -->
+                    {% for category in categories %}
+                        <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/sushi.png" %} "class="m-2" alt="{{category.name}}" title="{{category.name}}" width="60" height="60"><p>{{category.name}}</p></a></li>
+                        {% comment %} <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/pizza.png" %} "class="m-2" alt="Піца" title="Піца" width="60" height="60"><p>Піца</p></a></li>
+                        <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/salad.png" %} "class="m-2" alt="Салати" title="Салати" width="60" height="60"><p>Салати</p></a></li> {% endcomment %}
+                    {% endfor %}
+                    
                 </ul>
             </div>
         </nav>
