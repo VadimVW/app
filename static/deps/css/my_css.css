@@ -1,5 +1,6 @@
 body {
-  background-image: url("../images/bg-image.jpg");
+  /* background-image: url("../images/background.png"); */
+  background: linear-gradient(-180deg, rgb(0, 0, 0) 3%, rgb(127, 16, 16) 97.7%);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
@@ -49,31 +50,66 @@ body {
 .menu p {
   margin: 0;
   opacity: 0;
+  color: white;
 }
 
 .menu:hover p {
  opacity: 1;
-  transition: all .2s ease-in-out 0s;
+ transition: all .2s ease-in-out 0s;
 }
 
 .menu:hover {
   width: 200px;
-  transition: all .2s ease-in-out 0s;
+  transition: width .3s ease 0s;
+  /* transition: border 0.3s ease 0s; */
+  border-right: 3px solid rgb(33, 28, 28);
+}
+
+.menu:hover::before {
+  opacity: 0.5;
 }
 
 .menu {
+  z-index: 2;
   position: fixed;
   overflow: hidden;
   top: 56px;
   width: 80px;
   height: calc(100% - 56px);
-  background-color: white;
-  transition: all .2s ease-in-out 0s;
+  background: linear-gradient(-180deg, rgb(0, 0, 0) 3%, rgb(30, 4, 4) 97.7%);
+  border-right: 2px solid rgb(33, 28, 28);
+  transition: width .3s ease 0s;
+}
+
+.menu::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: linear-gradient(-180deg, rgb(0, 0, 0) 3%, rgb(127, 16, 16) 97.7%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity .3s ease-out;
+}
+
+.menu li:hover {
+  background-color: rgb(58, 50, 50);
 }
 
 .category-menu {
   list-style: none;
   padding: 0;
+}
+
+.bottom-card {
+  background: rgba(0, 0, 0, 0);
+  height: 200px;
+  margin-top: 40px;
+  color: white;
+}
+
+.dish-name {
+  font-weight: 600;
+  font-size: 19px;
 }
 
 @media (min-width: 1024px) {
