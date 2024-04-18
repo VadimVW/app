@@ -21,7 +21,7 @@ class Dishs(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name='Опис')
     image = models.ImageField(blank=True, null=True, upload_to='menu_images', verbose_name='Зображення')
     price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2, verbose_name='Ціна')
-    discount = models.DecimalField(default=0.00, max_digits=4, decimal_places=2, verbose_name='Знижка у %')
+    discount = models.IntegerField(default=0, verbose_name='Знижка у %')
     category = models.ForeignKey(to=Categories, on_delete=models.CASCADE, verbose_name='Категорія')
 
     class Meta:
@@ -31,3 +31,6 @@ class Dishs(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def sell_price(self):
+        return round(self.price - self.price * self.discount / 100, 2)
