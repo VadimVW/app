@@ -50,31 +50,7 @@
 
 
                 {% for dish in goods %}
-                
                     <!-- Карта товара -->
-                    <!-- <div class="col-lg-4 col-md-6 p-4">
-                        <div class="card border-black rounded custom-shadow">
-                            <img src="{% static dish.image %}" class="card-img-top" alt="...">
-                            <div class="card-body bg-opacity-0 my-card">
-                                <a href="../goods/product.html">
-                                    <p class="card-title">{{ dish.name }}</p>
-                                </a>
-                                <p class="card-text text-truncate">{{ dish.description }}</p>
-                                <p class="product_id">id: 02265</p>
-                                <div class="d-flex justify-content-between">
-                                    {% comment %} <p><s>100</s> $</p>
-                                    <p><strong>90.00 $</strong></p>
-                                    <span class="badge bg-warning text-dark">Скидка 10.00 %</span> {% endcomment %}
-                                    <p><strong>{{ dish.price }}</strong></p>
-                                    <a href="#" class="btn add-to-cart">
-                                        <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
-                                            width="32" height="32">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-
                     <div class="col-lg-3 col-md-5 p-3">
                         <div class="card rounded custom-shadow">
                             <img src="{% static dish.image %}" class="card-img-top" alt="...">
@@ -96,7 +72,6 @@
                             </div>
                         </div>
                     </div>
-
                 {% endfor %}
                 
 
