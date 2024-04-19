@@ -77,9 +77,10 @@
                 <ul class="category-menu">
                     {% tag_categories as categories %}
                     {% for category in categories %}
-                        <li><a class="text-black category" href="{% url "menu:index" category.slug %}"><img src="{% static "deps/icons/sushi.png" %} "class="m-2" alt="{{category.name}}" title="{{category.name}}" width="60" height="60"><p>{{category.name}}</p></a></li>
-                        {% comment %} <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/pizza.png" %} "class="m-2" alt="Піца" title="Піца" width="60" height="60"><p>Піца</p></a></li>
-                        <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/salad.png" %} "class="m-2" alt="Салати" title="Салати" width="60" height="60"><p>Салати</p></a></li> {% endcomment %}
+                        <li><a class="text-black category" href="{% url "menu:index" category.slug %}"><img src="
+                            {% if category.image %}
+                            {{ category.image.url }}
+                            {% endif %}" "class="m-2" alt="{{category.name}}" title="{{category.name}}" width="60" height="60"><p>{{category.name}}</p></a></li>
                     {% endfor %}
                     
                 </ul>

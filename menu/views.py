@@ -15,7 +15,7 @@ def menu(request, slug):
     else:    
         dishs = Dishs.objects.filter(category__slug=slug)
 
-    paginator = Paginator(dishs, 4)
+    paginator = Paginator(dishs, 12)
     current_page = paginator.page(int(page))    
 
     context = {
