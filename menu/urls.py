@@ -6,5 +6,5 @@ app_name = 'menu'
 
 urlpatterns = [
     path('', views.menu, name='index'),
-    path('dish/', views.dish, name='dish'),
+    path('dish/<slug:slug>', views.dish, name='dish'),
 ]

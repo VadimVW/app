@@ -13,5 +13,11 @@ def menu(request):
     }
     return render(request, 'menu/menu.html', context)
 
-def dish(request):
-    return render(request, 'menu/dish.html')
+def dish(request, slug):
+    dish = Dishs.objects.get(slug = slug)
+
+    context = {
+        'dish': dish
+    }
+
+    return render(request, 'menu/dish.html', context)

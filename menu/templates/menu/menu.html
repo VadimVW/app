@@ -52,6 +52,7 @@
                 {% for dish in dishs %}
                     <!-- Карта товара -->
                     <div class="col-lg-3 col-md-5 p-3">
+                        <a href="{% url "menu:dish" dish.slug %}">
                         <div class="card rounded custom-shadow">
                             {% if dish.image %}
                                 <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}">
@@ -81,6 +82,7 @@
                                 </a>
                             </div>
                         </div>
+                    </a>
                     </div>
                 {% endfor %}
                 
