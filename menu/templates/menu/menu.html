@@ -93,15 +93,31 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center my-4">
                     <div class="custom-shadow d-flex">
-                        <li class="page-item disabled">
-                          <a class="page-link">Previous</a>
+                        <li class="page-item {% if not dishs.has_previous  %} disabled {% endif %}">
+                          <a class="page-link" href="{% if dishs.has_previous%} 
+                          ?page={{dishs.previous_page_number}}
+                          {% else %}
+                          #
+                          {% endif %}" >Назад</a> 
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">Next</a>
-                        </li>
+
+                        {% for page in dishs.paginator.page_range %}
+                        {% if page >= dishs.number|add:-2 and page <= dishs.number|add:2 %}
+                            <li class="page-item 
+                            {% if dishs.number == page %}
+                            active
+                            {% endif %}"><a class="page-link" href="?page={{page}}">{{ page }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        
+                        <li class="page-item {% if not dishs.has_next  %} disabled {% endif %}">
+                            <a class="page-link" href="{% if dishs.has_next%} 
+                            ?page={{dishs.next_page_number}}
+                            {% else %}
+                            #
+                            {% endif %}" >Наступна</a> 
+                          </li>
+
                     </div>
                 </ul>
             </nav>

@@ -10,6 +10,7 @@ class Categories(models.Model):
         db_table = 'category'
         verbose_name = 'Категорію'
         verbose_name_plural = 'Категорії'
+        
 
     def __str__(self):
         return self.name
@@ -28,6 +29,7 @@ class Dishs(models.Model):
         db_table = 'dish'
         verbose_name = 'Страву'
         verbose_name_plural = 'Страви'
+        ordering = ("id",)
 
     def __str__(self):
         return self.name
