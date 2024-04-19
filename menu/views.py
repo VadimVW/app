@@ -1,11 +1,15 @@
+from unicodedata import category
 from django.shortcuts import render
 from django.template import context
 
 from menu.models import Dishs
 
-def menu(request):
-
-    dishs = Dishs.objects.all()
+def menu(request, slug):
+    
+    if slug == 'all':
+        dishs = Dishs.objects.all()
+    else:    
+        dishs = Dishs.objects.filter(category__slug=slug)
 
     context = {
         'title': 'Меню',

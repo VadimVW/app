@@ -50,9 +50,6 @@
                         <li class="nav-item">
                             <a class="nav-link  text-white" href="users/login.html">Войти</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link  text-white" href="{% url "menu:index" %}">Меню</a>
-                        </li>
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -80,7 +77,7 @@
                 <ul class="category-menu">
                     {% tag_categories as categories %}
                     {% for category in categories %}
-                        <li><a class="text-black category" href="{% url "menu:index" %}"><img src="{% static "deps/icons/sushi.png" %} "class="m-2" alt="{{category.name}}" title="{{category.name}}" width="60" height="60"><p>{{category.name}}</p></a></li>
+                        <li><a class="text-black category" href="{% url "menu:index" category.slug %}"><img src="{% static "deps/icons/sushi.png" %} "class="m-2" alt="{{category.name}}" title="{{category.name}}" width="60" height="60"><p>{{category.name}}</p></a></li>
                         {% comment %} <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/pizza.png" %} "class="m-2" alt="Піца" title="Піца" width="60" height="60"><p>Піца</p></a></li>
                         <li><a class="text-black category" href="goods/catalog.html"><img src="{% static "deps/icons/salad.png" %} "class="m-2" alt="Салати" title="Салати" width="60" height="60"><p>Салати</p></a></li> {% endcomment %}
                     {% endfor %}
