@@ -4,15 +4,20 @@ from django.shortcuts import render
 from django.template import context
 
 from menu.models import Dishs
+from menu.utils import q_search
 
-def menu(request, slug):
+def menu(request, slug=None):
 
     page = request.GET.get('page', 1)
     on_sale = request.GET.get('on_sale', None)
     order_by  = request.GET.get('order_by', None)
+    query  = request.GET.get('q', None)
+
 
     if slug == 'all':
         dishs = Dishs.objects.all()
+    elif query:
+        dishs = q_search(query)
     else:    
         dishs = Dishs.objects.filter(category__slug=slug)
 

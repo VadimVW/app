@@ -1,1 +1,0 @@
-[{"model": "menu.categories", "pk": 2, "fields": {"name": "Всі товари", "slug": "all"}}, {"model": "menu.categories", "pk": 3, "fields": {"name": "Суші", "slug": "sushi"}}, {"model": "menu.categories", "pk": 4, "fields": {"name": "Піца", "slug": "pica"}}, {"model": "menu.categories", "pk": 5, "fields": {"name": "Салат", "slug": "salat"}}]
