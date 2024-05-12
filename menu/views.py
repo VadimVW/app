@@ -16,7 +16,7 @@ def menu(request, slug=None):
 
     if slug == 'all':
         dishs = Dishs.objects.all()
-    elif query:
+    elif query or query == '':
         dishs = q_search(query)
     else:    
         dishs = Dishs.objects.filter(category__slug=slug)
