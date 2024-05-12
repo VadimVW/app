@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load menu_tags %}
 
 {% block content %}
 <div class="container">
@@ -10,47 +11,51 @@
         <div class="col-lg-10"> {% endcomment %}
             <!-- Контент на странице -->
             <div class="row">
-                <!-- Форма фильтров -->
+                <!-- Форма фільтрів -->
                 <div class="dropdown mb-2">
                     <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Фильтры
+                        Фільтри
                     </button>
             
-                    <form action="" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
+                    <form action="{% url "menu:index" slug_url%}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
                         <div class="form-check text-white mx-3">
-                            <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on">
-                            <input type="hidden" name="q" value="request.GET.q">
+                            <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on" 
+                            {% if request.GET.on_sale == 'on' %}checked{% endif %}>
+                            {% comment %} <input type="hidden" name="q" value="request.GET.q"> {% endcomment %}
                             <label class="form-check-label" for="flexCheckDefault">
-                                Товары по акции
+                                Товари по акції
                             </label>
                         </div>
-                        <p class="text-white mx-3 mt-3">Сортировать:</p>
+                        <p class="text-white mx-3 mt-3">Сортувати:</p>
                         <div class="form-check text-white mx-3">
-                            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default" checked>
+                            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default" 
+                            {% if not request.GET.order_by or request.GET.order_by == 'default'%}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault1">
-                                По умолчанию
+                                За замовчуванням
                             </label>
                         </div>
                         <div class="form-check text-white mx-3">
-                            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="price">
+                            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="price" 
+                            {% if request.GET.order_by == 'price' %}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault2">
-                                От дешевых к дорогим
+                                Від дешевих до дорогих
                             </label>
                         </div>
                         <div class="form-check text-white mx-3">
-                            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-price">
+                            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-price" 
+                            {% if request.GET.order_by == '-price' %}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault3">
-                                От дорогих к дешевым
+                                Від дорогих до дешевих
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
+                        <button type="submit" class="btn btn-primary mx-3 mt-3">Застосувати</button>
                     </form>
                 </div>
 
-
+                <!-- Карта товара -->
                 {% for dish in dishs %}
-                    <!-- Карта товара -->
+                   
                     <div class="col-lg-3 col-md-5 p-3">
                         <a href="{% url "menu:dish" dish.slug %}">
                         <div class="card rounded custom-shadow">
@@ -96,11 +101,7 @@
                 <ul class="pagination justify-content-center my-4">
                     <div class="custom-shadow d-flex">
                         <li class="page-item {% if not dishs.has_previous  %} disabled {% endif %}">
-                            <a class="page-link" href="{% if dishs.has_previous%} 
-                            ?page={{dishs.previous_page_number}}
-                            {% else %}
-                            #
-                            {% endif %}" >Назад</a> 
+                            <a class="page-link" href="{% if dishs.has_previous%}?{% change_params page=dishs.previous_page_number %}{% else %}#{% endif %}" >Назад</a> 
                         </li>
                         
                         {% for page in dishs.paginator.page_range %}
@@ -108,16 +109,12 @@
                         <li class="page-item 
                         {% if dishs.number == page %}
                         active
-                        {% endif %}"><a class="page-link" href="?page={{page}}">{{ page }}</a></li>
+                        {% endif %}"><a class="page-link" href="?{% change_params page=page %}">{{ page }}</a></li>
                         {% endif %}
                         {% endfor %}
                         
                         <li class="page-item {% if not dishs.has_next  %} disabled {% endif %}">
-                            <a class="page-link" href="{% if dishs.has_next%} 
-                            ?page={{dishs.next_page_number}}
-                            {% else %}
-                            #
-                            {% endif %}" >Наступна</a> 
+                            <a class="page-link" href="{% if dishs.has_next%}?{% change_params page=dishs.next_page_number %}{% else %}#{% endif %}" >Наступна</a> 
                         </li>
                         
                     </div>
