@@ -2,6 +2,10 @@
 {% load static %}
 {% load menu_tags %}
 
+{% block css_for_footer %}
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+{% endblock %}
+
 {% block content %}
 <div class="container">
     <div class="row mt-1">
@@ -54,6 +58,13 @@
                     </form>
                 </div>
 
+
+                {% if request.GET.q %}
+                <h3 class="mt-4 text-white">Результати пошуку по запиту "{{request.GET.q}}"</h3>
+                {% if not dishs %}
+                    <h2 class="mt-4 text-white">По запиту нічого не знайдено</h2>
+                {% endif %}
+                {% endif %}
                 <!-- Карта товара -->
                 {% for dish in dishs %}
                    
