@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jaro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
 body {
   /* background-image: url("../images/background.png"); */
   background: linear-gradient(-180deg, rgb(0, 0, 0) 3%, rgb(127, 16, 16) 97.7%);
@@ -6,6 +10,14 @@ body {
   background-position: center center;
   background-size: cover;
   height: 100%;
+}
+
+.logo_font {
+  font-family: 'Jaro', sans-serif;
+}
+
+.navbar_font {
+  font-family: 'Merriweather', serif;
 }
 
 .dropdown-toggle::after {
