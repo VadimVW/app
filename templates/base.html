@@ -45,7 +45,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white navbar_font" href="carts/cart.html">Кошик</a>
+                            <a class="nav-link  text-white navbar_font" href="{% url "user:users_cart" %}">Кошик</a>
                         </li>
                         {% if not user.is_authenticated %}
                             <li class="nav-item">
@@ -93,32 +93,14 @@
         </nav>
     </header>
     <section>
-        {% comment %} <div class="container">
+        <div class="container">
             <!-- Каталог и корзина с фиксированным расположением на странице -->
             <div class="row mt-1 position-fixed z-3">
-                <!-- Каталог -->
-                <div class="dropdown mb-2">
-                    <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Каталог
-                        <img class="mx-1" src="deps/icons/grid-fill.svg" alt="Catalog Icon" width="16"
-                            height="16">
-                    </button>
-                    <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Все товары</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Кухня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Спальня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Гостинная</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Офис</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Фурнитура</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Декор</a></li>
-                    </ul>
-                </div>
                 <!-- Значек корзины, вызывает модальное окно -->
                 <div>
-                    <button type="button" class="btn btn-dark btn-secondary d-flex" id="modalButton"
+                    <button type="button" class="btn btn-danger btn-secondary d-flex ms-5" id="modalButton"
                         aria-expanded="false">
-                        <img class="mx-1" src="deps/icons/basket2-fill.svg" alt="Catalog Icon" width="24"
+                        <img class="mx-1" src="{% static "deps/icons/basket2-fill.svg" %}" alt="Catalog Icon" width="24"
                             height="24">
                         <span id="goods-in-cart-count">0</span>
                     </button>
@@ -133,54 +115,12 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <h3 class="text-center mb-4">Корзина</h3>
+                                <h3 class="text-center mb-4">Кошик</h3>
                                 <div class="container" id="cart-items-container">
-                                    <!-- Разметка корзины -->
-                                    <div class="card mb-3 text-bg-light shadow-lg">
-                                        <div class="card-header">
-                                            <h5 class="card-title">Товар</h5>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">
-                                                <div class="row text-center">
-                                                    <div class="col p-0">
-                                                        <div class="input-group">
-                                                            <span class="input-group-btn">
-                                                                <button type="button" class="btn btn-dark btn-sm decrement"
-                                                                    data-cart-id="" data-cart-change-url="">-</button>
-                                                            </span>
-                                                            <input type="text" class="form-control number" value="1"
-                                                                readonly>
-                                                            <span class="input-group-btn">
-                                                                <button type="button" class="btn btn-dark btn-sm increment"
-                                                                    data-cart-id="" data-cart-change-url="">+</button>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col p-0">
-                                                        <p>x 100.00 = </p>
-                                                    </div>
-                                                    <div class="col p-0"><strong>100.00 $</strong></div>
-                                                    <div class="col p-0">
-                                                        <a href="#" class="remove-from-cart" data-cart-id="">
-                                                            <img class="mx-1" src="deps/icons/trash3-fill.svg"
-                                                                alt="Catalog Icon" width="16" height="16">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="card mb-3 shadow-lg">
-                                        <div class="card-footer">
-                                            <p class="float-left">Итого <strong>1</strong> товар(а) на сумму</p>
-                                            <h4 class="float-left"><strong>100.00 $</strong></h4>
-                                        </div>
-                                    </div>
-                                    <!-- Закончилась разметка корзины -->
+                                    {% include "carts/includes/included_carts.html" %}
                                 </div>
                                 <a class="btn btn-dark" href="orders/create_order.html">
-                                    Оформить заказ
+                                    Оформити замовлення
                                 </a>
                             </div>
                         </div>
@@ -188,7 +128,7 @@
                 </div> 
                 <!-- Закончилась разметка модального окна -->
             </div>
-        </div>{% endcomment %}
+        </div>
         
         {% include "includes/notifications.html" %}
         {% block content %}
