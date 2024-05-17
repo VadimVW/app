@@ -36,4 +36,7 @@ class Dishs(models.Model):
         return self.name
     
     def sell_price(self):
-        return round(self.price - self.price * self.discount / 100, 2)
+        if self.discount:
+            return round(self.price - self.price * self.discount / 100, 2)
+        
+        return self.price

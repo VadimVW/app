@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block modal_cart %}
+{% include "includes/cart_button.html" %}
+{% endblock modal_cart %}
+
 {% block content %}
 <div class="container">
     <div class="row mt-1">
@@ -40,7 +44,7 @@
                         <p class="card-text">Ціна: <strong>{{ dish.sell_price }} грн</strong></p>
                         <h5 class="card-title">{{ dish.name }}</h5>
                         <p class="card-text">{{ dish.description }}</p>
-                        <a href="#" class="btn btn-dark add-to-cart">Додати у кошик</a>
+                        <a href="{% url "cart:cart_add" dish.slug %}" class="btn btn-dark add-to-cart">Додати у кошик</a>
                     </div>
                 </div>
             </div>
