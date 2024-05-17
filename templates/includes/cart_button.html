@@ -25,9 +25,11 @@
                 <div class="container" id="cart-items-container">
                     {% include "carts/includes/included_carts.html" %}
                 </div>
+                {% if carts %}
                 <a class="btn btn-dark" href="orders/create_order.html">
                     Оформити замовлення
                 </a>
+                {% endif %}
             </div>
         </div>
     </div>
