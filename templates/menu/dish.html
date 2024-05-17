@@ -44,7 +44,10 @@
                         <p class="card-text">Ціна: <strong>{{ dish.sell_price }} грн</strong></p>
                         <h5 class="card-title">{{ dish.name }}</h5>
                         <p class="card-text">{{ dish.description }}</p>
-                        <a href="{% url "cart:cart_add" dish.slug %}" class="btn btn-dark add-to-cart">Додати у кошик</a>
+                        <a href="{% url "cart:cart_add" %}" class="btn btn-dark add-to-cart"
+                        data-product-id="{{ dish.id }}">
+                        {% csrf_token %}
+                        Додати у кошик</a>
                     </div>
                 </div>
             </div>
