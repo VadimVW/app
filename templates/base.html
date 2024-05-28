@@ -23,7 +23,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg my_navbar" data-bs-theme="dark">
             <div class="container">
                 <a class="navbar-brand logo_font me-5" href="{% url "main:index" %}">Lounge Resto Daniel</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -44,9 +44,6 @@
                                 <li><a class="dropdown-item  text-white navbar_font" href="{% url "main:about" %}">Про нас</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link  text-white navbar_font" href="{% url "user:users_cart" %}">Кошик</a>
-                        </li>
                         {% if not user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link  text-white navbar_font" href="{% url "users:login" %}">Увійти</a>
@@ -58,7 +55,7 @@
                                     Мій профіль
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item  text-white navbar_font" href="carts/cart.html">Кошик</a></li>
+                                    <li><a class="dropdown-item  text-white navbar_font" href="{% url "user:users_cart" %}">Кошик</a></li>
                                     <li><a class="dropdown-item  text-white navbar_font" href="{% url "users:profile" %}">Особистий кабінет</a>
                                     </li>
                                     {% if user.is_admin or user.is_staff %}
@@ -76,30 +73,25 @@
                         <input class="form-control me-2 navbar_font" type="search" name="q" id="searchInput" placeholder="Введіть запит" aria-label="Search" value="{{request.GET.q}}">
                         <button class="btn btn-outline-success text-white navbar_font" type="submit">Пошук</button>
                     </form>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 hide-on-mobile">
+                        <li class="nav-item">
+                            {% block modal_cart %}{% endblock %}
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="menu">
-                <ul class="category-menu">
-                    {% tag_sorted_categories as categories %}
-                    {% for category in categories %}
-                        <li><a class="text-black category" href="{% url "menu:index" category.slug %}">
-                            <img src="
-                            {% if category.image %}
-                            {{ category.image.url }}
-                            {% endif %}" class="m-2" alt="{{category.name}}" title="{{category.name}}" width="60" height="60"><p>{{category.name}}</p></a></li>
-                    {% endfor %}
-                    
-                </ul>
-            </div>
+            {% block menu %}
+            
+            {% endblock menu %}
         </nav>
     </header>
     <section>
         <div class="container">
-            <!-- Каталог и корзина с фиксированным расположением на странице -->
+            <!-- Каталог та кошик з фіксованим розташуванням на сторінці -->
             <div class="row mt-1 position-fixed z-3">
-                <!-- Значек корзины, вызывает модальное окно -->
-                {% block modal_cart %}{% endblock  %} 
-                <!-- Закончилась разметка модального окна -->
+                <!-- Значок кошика викликає модне вікно -->
+                
+                <!-- Закінчилась розмітка модального вікна -->
             </div>
         </div>
         
@@ -120,18 +112,18 @@
         var searchInput = document.getElementById("searchInput");
         var query = searchInput.value.trim();
     
-        // Проверяем, содержит ли поле поиска какое-либо значение
+        // Перевіряємо, чи містить поле пошуку якесь значення
         if (query === "") {
-            // Если пусто, устанавливаем action на "slug=all"
+            // Якщо порожньо, встановлюємо action на "slug=all"
             document.querySelector('form').action = "{% url 'menu:index' 'all' %}";
         } else {
-            // Если есть значение, используем текущий URL, но без параметра q
+            // Якщо є значення, використовуємо поточну URL-адресу, але без параметра q
             var currentUrl = "{% url 'menu:search' %}";
-            // Удаляем параметр q из URL
+            // Видаляємо параметр q з URL
             var urlWithoutQParam = currentUrl.split('?')[0];
             document.querySelector('form').action = urlWithoutQParam;
         }
-        return true; // Разрешаем отправку формы
+        return true; // Дозволяємо відправлення форми
     }
 </script>
 </body>

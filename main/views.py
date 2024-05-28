@@ -8,7 +8,7 @@ def index(request):
 
     context = {
         'title': 'Головна',
-        'content': 'Замовити їжу',
+        'content': 'Головна сторінка...',
     }
     return render(request, 'main/index.html', context)
 

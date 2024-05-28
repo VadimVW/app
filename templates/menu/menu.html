@@ -10,23 +10,36 @@
 {% include "includes/cart_button.html" %}
 {% endblock modal_cart %}
 
+{% block menu %}
+<div class="menu">
+    
+    <ul class="category-menu">
+        {% tag_sorted_categories as categories %}
+        {% for category in categories %}
+        <li><a class="text-black category" href="{% url "menu:index" category.slug %}">
+            <img src="
+            {% if category.image %}
+            {{ category.image.url }}
+            {% endif %}" class="m-2" alt="{{category.name}}" title="{{category.name}}" width="60" height="60"><p>{{category.name}}</p></a></li>
+            {% endfor %}
+            
+    </ul>
+</div>
+{% endblock menu %}
+
 {% block content %}
 <div class="container">
     <div class="row mt-1">
-        {% comment %} <div class="col-lg-2">
-            <!-- Пустой блок на усмотрение -->
-        </div>
-        <div class="col-lg-10"> {% endcomment %}
-            <!-- Контент на странице -->
+            <!-- Контент на сторінці -->
             <div class="row">
                 <!-- Форма фільтрів -->
                 <div class="dropdown mb-2">
-                    <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
+                    <button class="btn btn-secondary dropdown-toggle my_btn" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Фільтри
                     </button>
             
-                    <form action="{% if request.GET.q %}{% url "menu:search" %}{% else %}{% url "menu:index" slug_url%}{%endif%}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
+                    <form action="{% if request.GET.q %}{% url "menu:search" %}{% else %}{% url "menu:index" slug_url%}{%endif%}" method="get" class="dropdown-menu my_btn" data-bs-theme="dark">
                         <div class="form-check text-white mx-3">
                             <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on" {% if request.GET.on_sale == 'on' %}checked{% endif %}>
                             {% if request.GET.q %}
@@ -72,33 +85,33 @@
                 <!-- Карта товара -->
                 {% for dish in dishs %}
                    
-                    <div class="col-lg-3 col-md-5 p-3">
-                        <a href="{% url "menu:dish" dish.slug %}">
+                <div class="col-lg-3 col-md-5 p-3 menu_item">
+                    <a href="{% url "menu:dish" dish.slug %}" class='menu_link'>
                         <div class="card rounded custom-shadow">
                             {% if dish.image %}
-                                <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}">
+                                <div class="image-container">
+                                    <img src="{{ dish.image.url }}" class="card-img-top" alt="{{ dish.name }}">
+                                    {% if dish.discount %}
+                                        <span class="discount-label bg-warning text-dark">Знижка {{ dish.discount }}%</span>
+                                    {% endif %}
+                                </div>
                             {% else %}
-                                <img src="{% static "deps/images/Not found image.png" %}" class="card-img-top" alt="...">
-
+                                <div class="image-container">
+                                    <img src="{% static "deps/images/Not found image.png" %}" class="card-img-top" alt="...">
+                                </div>
                             {% endif %}
-                            
-
                         </div>
                         <div class="bottom-card">
-                                <h6 class="dish-name">{{ dish.name }}</h6>
+                            <h6 class="dish-name">{{ dish.name }}</h6>
                             <p class="card-text text-truncate">{{ dish.description }}</p>
                             <div class="d-flex justify-content-between">
-
                                 {% if dish.discount %}
                                     <p><s>{{ dish.price }}</s> грн</p>
                                     <p><strong>{{ dish.sell_price }} грн</strong></p>
-                                    <span class="bg-warning text-dark">Скидка {{ dish.discount }}%</span> 
                                 {% else %}
                                     <p><strong>{{ dish.price }} грн</strong></p>
                                 {% endif %}
-
-                                <a href="{% url "cart:cart_add" %}" class="btn add-to-cart"
-                                data-product-id="{{ dish.id }}">
+                                <a href="{% url "cart:cart_add" %}" class="btn add-to-cart" data-product-id="{{ dish.id }}">
                                     {% csrf_token %}
                                     <img class="mx-1" src="{% static "deps/icons/cart-plus.svg" %}" alt="Catalog Icon"
                                         width="32" height="32">
@@ -106,7 +119,7 @@
                             </div>
                         </div>
                     </a>
-                    </div>
+                </div>
                 {% endfor %}
                 
 
@@ -143,12 +156,4 @@
         </div>
     </div>
 </div>
-{% endblock  %}
-
-{% block footer %}
-    <footer class="py-4 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
-        </div>
-    </footer>
 {% endblock  %}

@@ -1,9 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
+{% load menu_tags %}
 
 {% block modal_cart %}
 {% include "includes/cart_button.html" %}
 {% endblock modal_cart %}
+
+{% block menu %}
+<div class="menu">
+    
+    <ul class="category-menu">
+        {% tag_sorted_categories as categories %}
+        {% for category in categories %}
+        <li><a class="text-black category" href="{% url "menu:index" category.slug %}">
+            <img src="
+            {% if category.image %}
+            {{ category.image.url }}
+            {% endif %}" class="m-2" alt="{{category.name}}" title="{{category.name}}" width="60" height="60"><p>{{category.name}}</p></a></li>
+            {% endfor %}
+            
+    </ul>
+</div>
+{% endblock menu %}
 
 {% block content %}
     <!-- Контент -->
@@ -13,7 +31,7 @@
                 <!-- Пустой блок на Ваше усмотрение -->
             </div>
             <div class="col-lg-10">
-                <!-- Контент на странице -->
+                <!-- Контент на сторінці -->
                 <h1 class="mt-5 pt-5"><strong>{{ content }}</strong></h1>
             </div>
         </div>

@@ -4,14 +4,14 @@
 {% user_carts request as carts %}
 
 <div>
-    <button type="button" class="btn btn-danger btn-secondary d-flex ms-5" id="modalButton"
+    <button type="button" class="btn my_btn my_btn_navbar btn-secondary d-flex ms-5" id="modalButton"
         aria-expanded="false">
         <img class="mx-1" src="{% static "deps/icons/basket2-fill.svg" %}" alt="Catalog Icon" width="24"
             height="24">
         <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
     </button>
 </div>
-<!-- Разметка модального окна корзины -->
+<!-- Розмітка модального вікна кошика -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -26,7 +26,7 @@
                     {% include "carts/includes/included_carts.html" %}
                 </div>
                 {% if carts %}
-                <a class="btn btn-dark" href="orders/create_order.html">
+                <a class="btn btn-dark" href="{% url "orders:create_order" %}">
                     Оформити замовлення
                 </a>
                 {% endif %}

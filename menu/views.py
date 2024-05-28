@@ -29,7 +29,7 @@ def menu(request, slug=None):
 
 
 
-    paginator = Paginator(dishs, 4)
+    paginator = Paginator(dishs, 8)
     current_page = paginator.page(int(page))    
 
     context = {
